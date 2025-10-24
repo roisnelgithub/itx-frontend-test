@@ -5,7 +5,7 @@ const Cart = () => {
   return (
     <div className="relative">
       <Badge
-        className="h-5 pt-1 min-w-5 rounded-full px-1 font-mono tabular-nums items-center justify-center absolute -top-3.5 -right-3.5"
+        className="h-4.5 min-w-4.5 px-1 pt-1 text-[12px] font-mono flex items-center justify-center absolute -top-2.5 -right-2.5 rounded-full"
         variant='blueLight'
       >
         8
