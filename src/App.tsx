@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Product from './pages/product'
-
-import './App.css'
+import './index.css';
 
 function App() {
   return (
