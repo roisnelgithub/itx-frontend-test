@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div className="w-full px-6 md:px-10 py-4 border-b border-gray-200">
       {/* Container: Logo + Breadcrumb + Cart */}
-      <div className="flex flex-row justify-between items-top">
+      <div className="w-full max-w-[1900px] mx-auto flex flex-row justify-between items-start">
 
         {/* Logo + Breadcrumb */}
         <div className="flex flex-col md:flex-row md:items-center md:gap-8">
