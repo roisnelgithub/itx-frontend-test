@@ -56,9 +56,17 @@ Otros comandos útiles:
 # Revisar el código con ESLint
 npm run lint
 
+# Correr los test en consola
+npm run test
+
+# Abre interfaz web para ver tests en vivo
+npm run test:ui
+
 # Compilar para producción
 npm run build
 
 # Previsualizar la build
 npm run preview
+
+
 
