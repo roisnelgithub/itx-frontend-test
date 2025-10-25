@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
-import Product from './product';
+import ProductPage from './product.page';
 
 describe('Product Page', () => {
   it('renders title correctly', () => {
-    render(<Product />);
-    expect(screen.getByText(/Página Principal de Productos/i)).toBeInTheDocument();
+    render(<ProductPage />);
+    expect(screen.getByText(/Product list/i)).toBeInTheDocument();
   });
 });
