@@ -7,10 +7,13 @@ interface IProductListProps {
 }
 const ProductList = ({ products }: IProductListProps) => {
   return (
-    <div>
+    <div className="mx-auto max-w-[1900px] grid gap-6 
+                    grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {products.map((product) => {
-        return (<ProductItem product={product} key={product.id} />)
-      })}
+        if (product.price === 0) return null;
+        return <ProductItem product={product} key={product.id} />
+      }
+      )}
     </div>
   )
 }
