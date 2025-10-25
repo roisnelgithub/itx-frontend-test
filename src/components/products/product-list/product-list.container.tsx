@@ -1,0 +1,51 @@
+import { useProducts } from "@/hooks/useProducts";
+import SearchField from "@/components/shared/fields/search.field"
+import ErrorMessage from "@/components/shared/errors/error-message";
+import Loader from "@/components/shared/loader/loader";
+import ProductNotFound from "./product-not-found";
+import ProductList from "./product-list"
+
+const ProductListWrapper = () => {
+  const { data: products, isLoading, isError, isSuccess } = useProducts();
+
+  const hasProducts = !!products && products.length > 0;
+
+
+  return (
+    <section className="w-full px-8">
+      {/* Header */}
+      <header className="flex w-full flex-col items-start gap-3 
+                        md:flex-row md:items-center md:justify-between md:gap-0">
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Product List
+        </h1>
+        <div className="w-full md:w-auto">
+          <SearchField disabled={isLoading} />
+        </div>
+      </header>
+
+      {/* Content */}
+      <main className="flex justify-center mt-12">
+        {isLoading && (
+          <Loader message="Loading products..." />
+        )}
+        {isError && (
+          <ErrorMessage message="Error loading products. Please try again." />
+        )}
+        {isSuccess && (
+          <>
+            {hasProducts ? (
+              <div className="w-full flex justify-start">
+                <ProductList products={products} />
+              </div>
+            ) : (
+              <ProductNotFound />
+            )}
+          </>
+        )}
+      </main>
+    </section>
+  )
+}
+
+export default ProductListWrapper
