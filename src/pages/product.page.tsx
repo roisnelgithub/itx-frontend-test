@@ -1,4 +1,4 @@
-import ProductListWrapper from '@/components/products/product-list/product-list.container';
+import ProductListWrapper from '@/components/products/product-list/product-list.wrapper';
 import React from 'react';
 
 const ProductPage: React.FC = () => {
