@@ -22,7 +22,16 @@ const ProductItem = ({ product }: IProductItemProps) => {
       <CardContent className="flex flex-col gap-1 p-4">
         <span className="text-sm text-gray-400 uppercase">{product.brand}</span>
         <ProductModel model={product.model} />
-        <PriceTag value={product.price} currency="EUR" />
+        {product.price !== 0 ?
+          (
+            <PriceTag value={product.price} currency="EUR" />
+          ) :
+          (
+            <span className="inline-block px-2 py-1 text-sm font-medium text-red-600 ">
+              Price not available
+            </span>)
+        }
+
       </CardContent>
     </Card>
   );
