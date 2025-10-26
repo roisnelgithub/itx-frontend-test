@@ -52,19 +52,19 @@ export interface ProductDetailsApiResponse {
   sensors: string[];
   battery: string;
   colors: string[];
-  options: Options;
+  options: ApiProductOptions;
 }
-export interface ColorOption {
+export interface ApiColorOption {
   code: number;
   name: string;
 }
-export interface StorageOption {
+export interface ApiStorageOption {
   code: number;
   name: string;
 }
-export interface Options {
-  colors: ColorOption[];
-  storages: StorageOption[];
+export interface ApiProductOptions {
+  colors: ApiColorOption[];
+  storages: ApiStorageOption[];
 }
 export const getProductById = async (id: string): Promise<ProductDetailsApiResponse> => {
   const { data } = await api.get(`/api/product/${id}`);
