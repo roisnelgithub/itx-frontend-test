@@ -1,15 +1,16 @@
+import { useState } from "react";
+
 import { useProducts } from "@/hooks/useProducts";
 import SearchField from "@/components/shared/fields/search.field"
-import ErrorMessage from "@/components/shared/errors/error-message";
-import Loader from "@/components/shared/loader/loader";
-import ProductNotFound from "./product-not-found";
-import ProductList from "./product-list"
+import ProductContent from "./product-content";
 
 const ProductListWrapper = () => {
   const { data: products, isLoading, isError, isSuccess } = useProducts();
+  const [query, setQuery] = useState("");
 
-  const hasProducts = !!products && products.length > 0;
-
+  const handleChange = (value: string) => {
+    setQuery(value)
+  }
 
   return (
     <section className="w-full px-8">
@@ -20,29 +21,21 @@ const ProductListWrapper = () => {
           Product List
         </h1>
         <div className="w-full md:w-auto">
-          <SearchField disabled={isLoading} />
+          <SearchField
+            value={query}
+            onChange={handleChange}
+            disabled={isLoading} />
         </div>
       </header>
 
       {/* Content */}
       <main className="flex justify-center mt-12">
-        {isLoading && (
-          <Loader message="Loading products..." />
-        )}
-        {isError && (
-          <ErrorMessage message="Error loading products. Please try again." />
-        )}
-        {isSuccess && (
-          <>
-            {hasProducts ? (
-              <div className="w-full flex justify-start">
-                <ProductList products={products} />
-              </div>
-            ) : (
-              <ProductNotFound />
-            )}
-          </>
-        )}
+        <ProductContent
+          isError={isError}
+          isLoading={isLoading}
+          isSuccess={isSuccess}
+          products={products}
+          query={query} />
       </main>
     </section>
   )
