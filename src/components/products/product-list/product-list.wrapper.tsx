@@ -18,7 +18,7 @@ const ProductListWrapper = () => {
       <header className="flex w-full flex-col items-start gap-3 
                         md:flex-row md:items-center md:justify-between md:gap-0">
         <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
-          Product List
+          Product list
         </h1>
         <div className="w-full md:w-auto">
           <SearchField
