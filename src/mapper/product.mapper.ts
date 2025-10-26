@@ -26,6 +26,7 @@ export interface ProductResume {
   brand: string;
   model: string;
   price: number;
+  imageURL: string;
   cpu: string;
   ram: string;
   os: string;
@@ -44,6 +45,7 @@ export const mapProductDetailsToResume = (
   brand: apiProduct.brand,
   model: apiProduct.model,
   price: parseCurrencyValue(apiProduct.price),
+  imageURL: apiProduct.imgUrl,
   cpu: apiProduct.cpu,
   ram: apiProduct.ram,
   os: apiProduct.os,
@@ -54,3 +56,38 @@ export const mapProductDetailsToResume = (
   dimensions: apiProduct.dimentions,
   weight: apiProduct.weight,
 });
+
+
+export interface Attribute {
+  label: string;
+  value: string;
+}
+
+export const mapProductToAttributes = (product: ProductResume): Attribute[] => {
+  const cameras = [...(product.primaryCamera || []), ...(product.secondaryCamera || [])].join(" / ");
+
+  const attributeKeys: { key: keyof ProductResume; label: string; formatter?: (val: any) => string }[] = [
+    { key: "brand", label: "Brand" },
+    { key: "model", label: "Model" },
+    { key: "price", label: "Price", formatter: (v) => `${v} €` },
+    { key: "cpu", label: "CPU" },
+    { key: "ram", label: "RAM" },
+    { key: "os", label: "Operative system" },
+    { key: "displayResolution", label: "Display resolution" },
+    { key: "battery", label: "Battery" },
+    { key: "dimensions", label: "Dimensions" },
+    { key: "weight", label: "Weight", formatter: (v) => `${v} g` },
+  ];
+
+  const attributes = attributeKeys
+    .map(({ key, label, formatter }) => {
+      const value = product[key];
+      if (!value) return null;
+      return { label, value: formatter ? formatter(value) : value };
+    })
+    .filter(Boolean) as Attribute[];
+
+  if (cameras) attributes.push({ label: "Camera", value: cameras });
+
+  return attributes;
+};
