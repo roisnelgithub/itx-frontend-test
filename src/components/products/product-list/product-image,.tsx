@@ -23,6 +23,7 @@ const ProductImage = ({ src, alt, className = "" }: IProductImageProps) => {
       <img
         src={src}
         alt={alt}
+        loading="lazy"
         onLoad={() => setIsLoading(false)}
         onError={() => setIsLoading(false)}
         className={`w-full h-full object-cover transition-opacity duration-500 rounded-lg ${isLoading ? "opacity-0" : "opacity-100"
