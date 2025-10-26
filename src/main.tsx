@@ -6,12 +6,15 @@ import { TooltipProvider } from './components/ui/tooltip';
 
 import App from './App';
 import './index.css';
+import { BreadcrumbProvider } from './components/contexts/breadcrumb.context';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <App />
+        <BreadcrumbProvider>
+          <App />
+        </BreadcrumbProvider>
       </TooltipProvider>
     </QueryClientProvider>
   </React.StrictMode>
