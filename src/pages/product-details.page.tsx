@@ -25,7 +25,7 @@ const ProductDetailsPage = () => {
   if (!product) return <ProductDetailsNotFound />
 
   return (
-    <ProductDetailsWrapper />
+    <ProductDetailsWrapper product={product} />
   )
 }
 
