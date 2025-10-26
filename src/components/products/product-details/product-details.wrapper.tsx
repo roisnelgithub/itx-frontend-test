@@ -2,6 +2,9 @@ import type { ProductResume } from "@/mapper/product.mapper";
 import ProductDetailsActions from "./product-details-actions"
 import ProductDetailsImage from "./product-details-image"
 import ProductDetailsInfo from "./product-details-info"
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 interface IProductDetailsWrapperProps {
   product: ProductResume;
@@ -9,9 +12,17 @@ interface IProductDetailsWrapperProps {
 const ProductDetailsWrapper = ({ product }: IProductDetailsWrapperProps) => {
   return (
     <section>
-      <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
-        Product details
-      </h1>
+      <div className="flex w-full gap-8 px-4">
+        <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Product details
+        </h1>
+        <Link to="/">
+          <Button variant="outline" size="sm" className="pr-4">
+            <ArrowLeft className="w-4 h-4 " />
+            Back
+          </Button>
+        </Link>
+      </div>
       <main className="flex justify-center py-12 px-4">
         <div className="flex flex-col md:flex-row w-full max-w-4xl gap-8">
           <div className="shrink-0 max-w-2xs min-w-2xs justify-center">
