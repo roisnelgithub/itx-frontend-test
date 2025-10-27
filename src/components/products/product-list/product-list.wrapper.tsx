@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useProducts } from "@/hooks/use-products";
+import { useProducts } from "@/hooks/query/use-products";
 import SearchField from "@/components/shared/fields/search.field"
 import ProductContent from "./product-content";
 
