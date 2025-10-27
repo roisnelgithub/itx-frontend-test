@@ -1,0 +1,15 @@
+import { useMutation } from "@tanstack/react-query";
+
+import { useCart } from "../../components/contexts/cart.context";
+import { addProductToCart, type AddProductToCartRequest, type AddProductToCartResponse } from "@/services/product.service";
+
+export const useAddProductToCart = () => {
+  const { setCount } = useCart();
+
+  return useMutation<AddProductToCartResponse, Error, AddProductToCartRequest>({
+    mutationFn: addProductToCart,
+    onSuccess: (data) => {
+      setCount((pre) => pre + data.count);
+    },
+  });
+};

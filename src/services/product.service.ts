@@ -70,3 +70,17 @@ export const getProductById = async (id: string): Promise<ProductDetailsApiRespo
   const { data } = await api.get(`/api/product/${id}`);
   return data;
 };
+
+export interface AddProductToCartResponse {
+  count: number;
+}
+export interface AddProductToCartRequest {
+  id: string;
+  colorCode: string;
+  storageCode: string;
+}
+
+export const addProductToCart = async (data: AddProductToCartRequest): Promise<AddProductToCartResponse> => {
+  const response = await api.post(`/api/cart`, { ...data });
+  return response.data;
+};

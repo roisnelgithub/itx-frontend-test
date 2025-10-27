@@ -7,14 +7,17 @@ import { TooltipProvider } from './components/ui/tooltip';
 import App from './App';
 import './index.css';
 import { BreadcrumbProvider } from './components/contexts/breadcrumb.context';
+import { CartProvider } from './components/contexts/cart.context';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <BreadcrumbProvider>
-          <App />
-        </BreadcrumbProvider>
+        <CartProvider>
+          <BreadcrumbProvider>
+            <App />
+          </BreadcrumbProvider>
+        </CartProvider>
       </TooltipProvider>
     </QueryClientProvider>
   </React.StrictMode>

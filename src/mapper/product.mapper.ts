@@ -1,7 +1,8 @@
 import { parseCurrencyValue } from "@/utils/format-price";
 import { capitalize } from "@/utils/capitalize";
-import type { ApiProductOptions, ProductApiResponse, ProductDetailsApiResponse } from "@/services/product.service";
+import type { AddProductToCartRequest, ApiProductOptions, ProductApiResponse, ProductDetailsApiResponse } from "@/services/product.service";
 import type { SelectOption } from "@/components/shared/select/dynamic-select";
+import type { IActionFormValues } from "@/components/forms/product-details-actions.form";
 
 export interface Product {
   id: string;
@@ -131,4 +132,16 @@ export const mapStorageOptionsToSelect = (options: StorageOption[]): SelectOptio
     label: capitalize(opt.name),
     value: opt.code.toString(),
   }));
+};
+
+
+export const mapFormToAddProductRequest = (
+  productId: string,
+  formData: IActionFormValues
+): AddProductToCartRequest => {
+  return {
+    id: productId,
+    colorCode: formData.color,
+    storageCode: formData.storage,
+  };
 };
