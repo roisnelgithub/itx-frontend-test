@@ -15,7 +15,7 @@ const ErrorMessage = ({
   textClassName = "text-md",
 }: IErrorMessageProps) => {
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div className={`flex items-center gap-4 flex-col justify-center py-10 ${className}`}>
       {icon && <span>{icon}</span>}
       <p className={textClassName}>{message}</p>
     </div>

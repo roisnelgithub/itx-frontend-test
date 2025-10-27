@@ -4,6 +4,7 @@ import ProductList from "./product-list";
 import ProductNotFound from "./product-not-found";
 import type { Product } from "@/mapper/product.mapper";
 import { useProductFilter } from "@/hooks/use-product-filter";
+import type { ApiError } from "@/lib/axios";
 
 interface IProductContentProps {
   products?: Product[];
@@ -11,9 +12,10 @@ interface IProductContentProps {
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
+  error?: ApiError;
 }
 
-const ProductContent = ({ products, query, isLoading, isError, isSuccess }: IProductContentProps) => {
+const ProductContent = ({ products, query, isLoading, isError, isSuccess, error }: IProductContentProps) => {
 
   const { filteredProducts, isFiltering } = useProductFilter(products, query);
 
@@ -21,7 +23,9 @@ const ProductContent = ({ products, query, isLoading, isError, isSuccess }: IPro
 
 
   if (isLoading || isFiltering) return <Loader message="Loading products..." />;
-  if (isError) return <ErrorMessage message="Error loading products. Please try again." />;
+  if (isError) return <ErrorMessage
+    message={error?.message || "Error loading products. Please try again."}
+  />
   if (isSuccess && !hasProducts) return <ProductNotFound />;
 
   return (
