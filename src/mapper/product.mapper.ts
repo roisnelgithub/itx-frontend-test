@@ -1,5 +1,7 @@
-import type { ProductApiResponse, ProductDetailsApiResponse } from "@/services/product.service";
 import { parseCurrencyValue } from "@/utils/format-price";
+import { capitalize } from "@/utils/capitalize";
+import type { ApiProductOptions, ProductApiResponse, ProductDetailsApiResponse } from "@/services/product.service";
+import type { SelectOption } from "@/components/shared/select/dynamic-select";
 
 export interface Product {
   id: string;
@@ -36,7 +38,30 @@ export interface ProductResume {
   secondaryCamera: string[];
   dimensions: string;
   weight: string;
+  options: Options
 }
+export interface ColorOption {
+  code: number;
+  name: string;
+}
+export interface StorageOption {
+  code: number;
+  name: string;
+}
+export interface Options {
+  colors: ColorOption[];
+  storages: StorageOption[];
+}
+export const mapProductOptions = (options?: ApiProductOptions): Options => ({
+  colors: options?.colors?.map((c) => ({
+    code: c.code,
+    name: c.name,
+  })) || [],
+  storages: options?.storages?.map((s) => ({
+    code: s.code,
+    name: s.name,
+  })) || [],
+});
 
 export const mapProductDetailsToResume = (
   apiProduct: ProductDetailsApiResponse
@@ -55,6 +80,7 @@ export const mapProductDetailsToResume = (
   secondaryCamera: apiProduct.secondaryCmera,
   dimensions: apiProduct.dimentions,
   weight: apiProduct.weight,
+  options: mapProductOptions(apiProduct.options),
 });
 
 
@@ -90,4 +116,19 @@ export const mapProductToAttributes = (product: ProductResume): Attribute[] => {
   if (cameras) attributes.push({ label: "Camera", value: cameras });
 
   return attributes;
+};
+
+
+export const mapColorOptionsToSelect = (options: ColorOption[]): SelectOption[] => {
+  return options.map((opt) => ({
+    label: capitalize(opt.name),
+    value: opt.code.toString(),
+  }));
+};
+
+export const mapStorageOptionsToSelect = (options: StorageOption[]): SelectOption[] => {
+  return options.map((opt) => ({
+    label: capitalize(opt.name),
+    value: opt.code.toString(),
+  }));
 };
