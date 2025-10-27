@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <!-- Marco negro -->
+  <rect x="16" y="8" width="32" height="48" rx="6" ry="6" fill="none" stroke="#000000" stroke-width="2" transform="rotate(-15 32 32)"></rect>
+  
+  <!-- Pantalla azul -->
+  <rect x="18" y="10" width="28" height="44" rx="4" ry="4" fill="#4A90E2" transform="rotate(-15 32 32)"></rect>
+  
+  <!-- Botón de encendido inferior con margen -->
+  <circle cx="32" cy="50" r="2" fill="#ffffff" transform="rotate(-15 32 32)"></circle>
+</svg>
