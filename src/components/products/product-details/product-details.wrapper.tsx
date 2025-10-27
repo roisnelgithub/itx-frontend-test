@@ -1,15 +1,23 @@
-import type { ProductResume } from "@/mapper/product.mapper";
-import ProductDetailsActions from "./product-details-actions"
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+
+import { mapColorOptionsToSelect, mapStorageOptionsToSelect, type ProductResume } from "@/mapper/product.mapper";
 import ProductDetailsImage from "./product-details-image"
 import ProductDetailsInfo from "./product-details-info"
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import ProductDetailsForm from "@/components/forms/product-details-actions.form";
 
 interface IProductDetailsWrapperProps {
   product: ProductResume;
 }
 const ProductDetailsWrapper = ({ product }: IProductDetailsWrapperProps) => {
+  const { options: { colors, storages } } = product;
+
+  const colorSelectOptions = mapColorOptionsToSelect(colors);
+  const storageSelectOptions = mapStorageOptionsToSelect(storages);
+
   return (
     <section>
       <div className="flex w-full gap-8 px-4">
@@ -30,7 +38,18 @@ const ProductDetailsWrapper = ({ product }: IProductDetailsWrapperProps) => {
           </div>
           <div className="flex-1 flex flex-col gap-4">
             <ProductDetailsInfo product={product} />
-            <ProductDetailsActions />
+            <Card>
+              <CardHeader>
+                <CardTitle>ACTIONS</CardTitle>
+              </CardHeader>
+              <Separator />
+              <CardContent>
+                <ProductDetailsForm
+                  colorOptions={colorSelectOptions}
+                  storageOptions={storageSelectOptions}
+                  productId={product.id} />
+              </CardContent>
+            </Card>
           </div>
         </div>
       </main>
