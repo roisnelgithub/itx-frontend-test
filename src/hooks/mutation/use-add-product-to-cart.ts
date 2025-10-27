@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 
 import { useCart } from "../../components/contexts/cart.context";
 import { addProductToCart, type AddProductToCartRequest, type AddProductToCartResponse } from "@/services/product.service";
+import { showSuccessToast } from "@/lib/toast";
 
 export const useAddProductToCart = () => {
   const { setCount } = useCart();
@@ -10,6 +11,7 @@ export const useAddProductToCart = () => {
     mutationFn: addProductToCart,
     onSuccess: (data) => {
       setCount((pre) => pre + data.count);
+      showSuccessToast("Product added to cart successfully");
     },
   });
 };

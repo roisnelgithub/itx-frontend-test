@@ -5,7 +5,7 @@ import SearchField from "@/components/shared/fields/search.field"
 import ProductContent from "./product-content";
 
 const ProductListWrapper = () => {
-  const { data: products, isLoading, isError, isSuccess } = useProducts();
+  const { data: products, isLoading, isError, error, isSuccess } = useProducts();
   const [query, setQuery] = useState("");
 
   const handleChange = (value: string) => {
@@ -32,6 +32,7 @@ const ProductListWrapper = () => {
       <main className="flex justify-center mt-12">
         <ProductContent
           isError={isError}
+          error={error ?? undefined}
           isLoading={isLoading}
           isSuccess={isSuccess}
           products={products}

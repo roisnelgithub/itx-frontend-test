@@ -12,7 +12,7 @@ const ProductDetailsPage = () => {
   const { id } = useParams();
   const { setLabel } = useBreadcrumb();
 
-  const { data: product, isLoading, isError } = useProduct(id || "");
+  const { data: product, isLoading, isError, error } = useProduct(id || "");
 
   useLayoutEffect(() => {
     if (!product) return;
@@ -21,7 +21,7 @@ const ProductDetailsPage = () => {
   }, [id, product, setLabel]);
 
   if (isLoading) return <Loader message="Loading product..." />
-  if (isError) return <ErrorMessage message="Error loading product. Please try again." />;
+  if (isError) return <ErrorMessage message={error?.message || "Error loading product. Please try again."} />;
   if (!product) return <ProductDetailsNotFound />
 
   return (
