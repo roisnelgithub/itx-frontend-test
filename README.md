@@ -1,6 +1,6 @@
 # 📱 ITX Mobile Shop
 
-**itx-frontend-test** es una miniaplicación para **comprar dispositivos móviles**, desarrollada con **React**, **TypeScript** y **Vite**.  
+**ITX Mobile Shop** es una miniaplicación para **comprar dispositivos móviles**, desarrollada con **React**, **TypeScript** y **Vite**.  
 Este proyecto forma parte de una **prueba técnica** para el puesto de *desarrollador frontend*.
 
 ---
