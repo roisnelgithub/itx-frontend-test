@@ -5,6 +5,7 @@ import ProductDetailsImage from "./product-details-image"
 import ProductDetailsInfo from "./product-details-info"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ProductDetailsForm from "@/components/forms/product-details-actions.form";
+import { Settings2 } from "lucide-react";
 
 interface IProductDetailsWrapperProps {
   product: ProductResume;
@@ -25,7 +26,10 @@ const ProductDetailsWrapper = ({ product }: IProductDetailsWrapperProps) => {
           <ProductDetailsInfo product={product} />
           <Card>
             <CardHeader>
-              <CardTitle>ACTIONS</CardTitle>
+              <CardTitle className="flex gap-2 items-center">
+                <Settings2 />
+                ACTIONS
+              </CardTitle>
             </CardHeader>
             <Separator />
             <CardContent>

@@ -88,33 +88,34 @@ export const mapProductDetailsToResume = (
 export interface Attribute {
   label: string;
   value: string;
+  icon?: string;
 }
 
 export const mapProductToAttributes = (product: ProductResume): Attribute[] => {
   const cameras = [...(product.primaryCamera || []), ...(product.secondaryCamera || [])].join(" / ");
 
-  const attributeKeys: { key: keyof ProductResume; label: string; formatter?: (val: any) => string }[] = [
-    { key: "brand", label: "Brand" },
-    { key: "model", label: "Model" },
-    { key: "price", label: "Price", formatter: (v) => `${v} €` },
-    { key: "cpu", label: "CPU" },
-    { key: "ram", label: "RAM" },
-    { key: "os", label: "Operative system" },
-    { key: "displayResolution", label: "Display resolution" },
-    { key: "battery", label: "Battery" },
-    { key: "dimensions", label: "Dimensions" },
-    { key: "weight", label: "Weight", formatter: (v) => `${v} g` },
+  const attributeKeys: { key: keyof ProductResume; label: string; formatter?: (val: any) => string; icon?: string }[] = [
+    { key: "brand", label: "Brand", icon: "Tag" },
+    { key: "model", label: "Model", icon: "Smartphone" },
+    { key: "price", label: "Price", formatter: (v) => `${v} €`, icon: "DollarSign" },
+    { key: "cpu", label: "CPU", icon: "Cpu" },
+    { key: "ram", label: "RAM", icon: "Microchip" },
+    { key: "os", label: "Operative system", icon: "Monitor" },
+    { key: "displayResolution", label: "Display resolution", icon: "Proportions" },
+    { key: "battery", label: "Battery", icon: "BatteryFull" },
+    { key: "dimensions", label: "Dimensions", icon: "Ruler" },
+    { key: "weight", label: "Weight", formatter: (v) => `${v} g`, icon: "Scale" },
   ];
 
   const attributes = attributeKeys
-    .map(({ key, label, formatter }) => {
+    .map(({ key, label, formatter, icon }) => {
       const value = product[key];
       if (!value) return null;
-      return { label, value: formatter ? formatter(value) : value };
+      return { label, value: formatter ? formatter(value) : value, icon };
     })
     .filter(Boolean) as Attribute[];
 
-  if (cameras) attributes.push({ label: "Camera", value: cameras });
+  if (cameras) attributes.push({ label: "Camera", value: cameras, icon: "Camera" });
 
   return attributes;
 };
