@@ -9,5 +9,7 @@ export const useProducts = () => {
       const data = await getProducts();
       return mapProducts(data);
     },
+    staleTime: 1000 * 60 * 60,
+    gcTime: 1000 * 60 * 60,
   });
 };

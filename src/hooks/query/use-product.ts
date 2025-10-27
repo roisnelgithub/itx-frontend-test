@@ -10,5 +10,7 @@ export const useProduct = (id: string) => {
       return mapProductDetailsToResume(data);
     },
     enabled: !!id,
+    staleTime: 1000 * 60 * 60,
+    gcTime: 1000 * 60 * 60,
   });
 };
