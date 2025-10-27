@@ -1,4 +1,3 @@
-
 import {
   Select,
   SelectContent,
@@ -8,42 +7,63 @@ import {
 } from "@/components/ui/select";
 import { useEffect, useState } from "react";
 
-interface IDynamicSelectProps {
-  options: string[];
-  onChange?: (value: string) => void;
-  label?: string;
+export interface SelectOption {
+  label: string;
+  value: string;
 }
 
-const DynamicSelect = ({ options, onChange, label }: IDynamicSelectProps) => {
-  const [selected, setSelected] = useState<string>("");
+interface IDynamicSelectProps {
+  options: SelectOption[];
+  value?: string;
+  onChange?: (value: string) => void;
+  label?: string;
+  placeholder?: string;
+}
 
+const DynamicSelect = ({
+  options,
+  value,
+  onChange,
+  label,
+  placeholder = "Select option",
+}: IDynamicSelectProps) => {
+  const [internalValue, setInternalValue] = useState<string>("");
+
+  const isControlled = value !== undefined;
+
+  const currentValue = isControlled ? value : internalValue;
 
   useEffect(() => {
     if (options.length === 1) {
-      setSelected(options[0]);
-      if (onChange) onChange(options[0]);
-    } else {
-      setSelected("");
+      const singleValue = options[0].value;
+      if (!isControlled) setInternalValue(singleValue);
+      onChange?.(singleValue);
+    } else if (!isControlled) {
+      setInternalValue("");
     }
-  }, [options, onChange]);
+  }, [options, isControlled, onChange]);
 
-  const handleChange = (value: string) => {
-    setSelected(value);
-    if (onChange) onChange(value);
+  const handleChange = (val: string) => {
+    if (!isControlled) setInternalValue(val);
+    onChange?.(val);
   };
 
   return (
     <div className="flex flex-col gap-1 w-full">
-      {label && <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>}
+      {label && (
+        <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          {label}
+        </label>
+      )}
 
-      <Select value={selected} onValueChange={handleChange} >
+      <Select value={currentValue} onValueChange={handleChange}>
         <SelectTrigger className="w-full">
-          <SelectValue placeholder={options.length > 1 ? "Select an option" : ""} />
+          <SelectValue placeholder={options.length > 1 ? placeholder : ""} />
         </SelectTrigger>
         <SelectContent>
           {options.map((option) => (
-            <SelectItem key={option} value={option}>
-              {option}
+            <SelectItem key={option.label} value={option.value}>
+              {option.label}
             </SelectItem>
           ))}
         </SelectContent>
