@@ -1,6 +1,3 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 import { mapColorOptionsToSelect, mapStorageOptionsToSelect, type ProductResume } from "@/mapper/product.mapper";
@@ -19,41 +16,28 @@ const ProductDetailsWrapper = ({ product }: IProductDetailsWrapperProps) => {
   const storageSelectOptions = mapStorageOptionsToSelect(storages);
 
   return (
-    <section>
-      <div className="flex w-full gap-8 px-4">
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
-          Product details
-        </h1>
-        <Link to="/">
-          <Button variant="outline" size="sm" className="pr-4">
-            <ArrowLeft className="w-4 h-4 " />
-            Back
-          </Button>
-        </Link>
-      </div>
-      <main className="flex justify-center py-12 px-4">
-        <div className="flex flex-col md:flex-row w-full max-w-4xl gap-8">
-          <div className="shrink-0 max-w-2xs min-w-2xs justify-center">
-            <ProductDetailsImage alt={product.model} imageURL={product.imageURL} />
-          </div>
-          <div className="flex-1 flex flex-col gap-4">
-            <ProductDetailsInfo product={product} />
-            <Card>
-              <CardHeader>
-                <CardTitle>ACTIONS</CardTitle>
-              </CardHeader>
-              <Separator />
-              <CardContent>
-                <ProductDetailsForm
-                  colorOptions={colorSelectOptions}
-                  storageOptions={storageSelectOptions}
-                  productId={product.id} />
-              </CardContent>
-            </Card>
-          </div>
+    <main className="flex justify-center py-12 px-4">
+      <div className="flex flex-col md:flex-row w-full max-w-4xl gap-8">
+        <div className="shrink-0 max-w-2xs min-w-2xs justify-center">
+          <ProductDetailsImage alt={product.model} imageURL={product.imageURL} />
         </div>
-      </main>
-    </section>
+        <div className="flex-1 flex flex-col gap-4">
+          <ProductDetailsInfo product={product} />
+          <Card>
+            <CardHeader>
+              <CardTitle>ACTIONS</CardTitle>
+            </CardHeader>
+            <Separator />
+            <CardContent>
+              <ProductDetailsForm
+                colorOptions={colorSelectOptions}
+                storageOptions={storageSelectOptions}
+                productId={product.id} />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </main>
   );
 }
 
