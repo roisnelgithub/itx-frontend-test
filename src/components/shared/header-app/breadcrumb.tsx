@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
-import { useBreadcrumb } from "@/components/contexts/breadcrumb.context";
+import { useBreadcrumb } from "@/contexts/breadcrumb.context";
 import { formatPath } from "@/utils/format-url";
 
 const DynamicBreadcrumbs = () => {

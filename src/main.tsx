@@ -7,8 +7,8 @@ import { Toaster } from "sonner";
 
 import App from './App';
 import './index.css';
-import { BreadcrumbProvider } from './components/contexts/breadcrumb.context';
-import { CartProvider } from './components/contexts/cart.context';
+import { BreadcrumbProvider } from './contexts/breadcrumb.context';
+import { CartProvider } from './contexts/cart.context';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

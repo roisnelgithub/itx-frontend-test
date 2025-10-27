@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { useCart } from "../../components/contexts/cart.context";
+import { useCart } from "../../contexts/cart.context";
 import { addProductToCart, type AddProductToCartRequest, type AddProductToCartResponse } from "@/services/product.service";
 import { showSuccessToast } from "@/lib/toast";
 

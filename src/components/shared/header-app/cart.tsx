@@ -1,4 +1,4 @@
-import { useCart } from "@/components/contexts/cart.context";
+import { useCart } from "@/contexts/cart.context";
 import { Badge } from "@/components/ui/badge"
 import { ShoppingCart } from "lucide-react";
 

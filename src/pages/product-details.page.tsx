@@ -2,7 +2,7 @@ import { useLayoutEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import ProductDetailsWrapper from "@/components/products/product-details/product-details.wrapper";
-import { useBreadcrumb } from "@/components/contexts/breadcrumb.context";
+import { useBreadcrumb } from "@/contexts/breadcrumb.context";
 import { useProduct } from "@/hooks/query/use-product";
 import Loader from "@/components/shared/loader/loader";
 import ProductDetailsNotFound from "@/components/products/product-details/product-details-not-found";
