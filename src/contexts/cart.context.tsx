@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 interface CartContextType {
   count: number;
   setCount: React.Dispatch<React.SetStateAction<number>>;
+  resetCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -23,8 +24,13 @@ export const CartProvider = ({ children }: ICartProviderProps) => {
     localStorage.setItem(CART_KEY, String(count));
   }, [count]);
 
+  const resetCart = () => {
+    setCount(0);
+    localStorage.setItem(CART_KEY, "0");
+  };
+
   return (
-    <CartContext.Provider value={{ count, setCount }}>
+    <CartContext.Provider value={{ count, setCount, resetCart }}>
       {children}
     </CartContext.Provider>
   );
