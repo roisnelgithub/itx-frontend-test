@@ -36,7 +36,7 @@ export default function DynamicSelectField({
             placeholder={placeholder}
           />
           {fieldState.error && (
-            <p className="absolute -bottom-6 left-0 text-sm text-red-600 mt-1">{fieldState.error.message}</p>
+            <p className="lg:absolute lg:-bottom-6 lg:left-0 text-sm text-red-600 mt-1">{fieldState.error.message}</p>
           )}
         </div>
       )}
