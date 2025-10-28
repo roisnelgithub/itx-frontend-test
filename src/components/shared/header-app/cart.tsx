@@ -7,12 +7,10 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { useCartStore } from "@/store/cart.store";
+import CartItem from "./cart-item";
 
 const Cart = () => {
-  const { count, resetCart } = useCartStore();
-
-
-
+  const { count, resetCart, items } = useCartStore();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -29,17 +27,31 @@ const Cart = () => {
         </div>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent side="bottom" align="end" className="w-36">
+      <DropdownMenuContent side="bottom" align="end" className="p-4" >
         {count === 0 ? (
           <DropdownMenuItem disabled>
             <Inbox />
             Cart empty
           </DropdownMenuItem>
         ) : (
-          <DropdownMenuItem onClick={resetCart}>
-            <Trash2 />
-            Reset cart
-          </DropdownMenuItem>
+          <div className="space-y-4">
+            {items.map((item, index) => (
+              <div key={item.uniqueId} className={index < items.length - 1 ? "mb-2" : ""}>
+                <CartItem item={item} />
+              </div>
+            ))}
+            <div className="mt-2 border-t pt-2 flex justify-between ">
+              <DropdownMenuItem onClick={resetCart} className="justify-center">
+                <Trash2 /> <span className="pr-2">
+                  Reset cart
+                </span>
+              </DropdownMenuItem>
+              <div className="flex flex-row items-center gap-2 font-bold">
+                <span>Total:</span>
+                <span>${items.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}</span>
+              </div>
+            </div>
+          </div>
         )}
       </DropdownMenuContent>
     </DropdownMenu>
