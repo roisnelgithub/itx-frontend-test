@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+
 export const api = axios.create({
   baseURL: 'https://itx-frontend-test.onrender.com',
   headers: {
@@ -6,7 +7,7 @@ export const api = axios.create({
   },
 });
 
-export interface ApiError {
+export interface IApiError {
   message: string;
   status?: number;
 }
@@ -26,6 +27,6 @@ api.interceptors.response.use(
       status = error.response.status;
     }
 
-    return Promise.reject({ message, status } as ApiError);
+    return Promise.reject({ message, status } as IApiError);
   }
 );

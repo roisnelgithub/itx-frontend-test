@@ -5,9 +5,11 @@ import { queryClient } from './lib/query-client';
 import { TooltipProvider } from './components/ui/tooltip';
 import { Toaster } from "sonner";
 
-import App from './App';
-import './index.css';
 import { BreadcrumbProvider } from './contexts/breadcrumb.context';
+import App from './App';
+
+import './index.css';
+
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

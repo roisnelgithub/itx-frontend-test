@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import ProductPage from './pages/product.page'
+import ProductDetailsPage from './features/products/pages/product-details.page';
+import ProductPage from './features/products/pages/product.page'
 import MainLayout from './components/layouts/main-layout';
-import './index.css';
-import ProductDetailsPage from './pages/product-details.page';
 import NotFoundPage from './pages/not-found.page';
+
+import './index.css';
 
 function App() {
   return (
