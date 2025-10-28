@@ -9,9 +9,6 @@ import {
 import { useCartStore } from "@/store/cart.store";
 import CartItem from "./cart-item";
 
-import { useCartStore } from "@/store/cart.store";
-import CartItem from "./cart-item";
-
 const Cart = () => {
   const { count, resetCart, items } = useCartStore();
   return (
