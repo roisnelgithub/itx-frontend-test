@@ -25,13 +25,15 @@ const ProductDetailsPage = () => {
   return (
     <section>
       <div className="w-full gap-8 px-4 flex justify-between md:justify-start">
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+        <h1 className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-gray-100">
           Product details
         </h1>
         <Link to="/">
-          <Button variant="outline" size="sm" className="pr-4">
-            <ArrowLeft className="w-4 h-4 " />
-            Back
+          <Button variant="outline" size="sm" className="pr-4  justify-center items-center">
+            <ArrowLeft className="w-4 h-4" />
+            <span className="mt-0.5">
+              Back
+            </span>
           </Button>
         </Link>
       </div>
