@@ -1,4 +1,3 @@
-import { useCart } from "@/contexts/cart.context";
 import { Badge } from "@/components/ui/badge";
 import { Inbox, ShoppingCart, Trash2 } from "lucide-react";
 import {
@@ -7,13 +6,12 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+import { useCartStore } from "@/store/cart.store";
 
 const Cart = () => {
-  const { count, setCount } = useCart();
+  const { count, resetCart } = useCartStore();
 
-  const resetCart = () => {
-    if (count > 0) setCount(0);
-  };
+
 
   return (
     <DropdownMenu>

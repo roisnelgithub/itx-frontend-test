@@ -8,17 +8,14 @@ import { Toaster } from "sonner";
 import App from './App';
 import './index.css';
 import { BreadcrumbProvider } from './contexts/breadcrumb.context';
-import { CartProvider } from './contexts/cart.context';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <CartProvider>
-          <BreadcrumbProvider>
-            <App />
-          </BreadcrumbProvider>
-        </CartProvider>
+        <BreadcrumbProvider>
+          <App />
+        </BreadcrumbProvider>
       </TooltipProvider>
       <Toaster position="bottom-right" />
     </QueryClientProvider>
