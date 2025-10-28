@@ -2,7 +2,7 @@ import type z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";
-import { Loader2, ShoppingCart } from "lucide-react";
+import { HardDrive, Loader2, Palette, ShoppingCart } from "lucide-react";
 
 import { actionFormSchema } from "./product.schema";
 import DynamicSelectField from "../shared/fields/dynamic-select.field";
@@ -57,7 +57,7 @@ const ProductDetailsForm = ({ product, colorOptions, storageOptions }: IProductD
             name="color"
             control={control}
             options={colorOptions}
-            label="Color"
+            label={<div className="flex items-center gap-1"><Palette className="h4 w-4" />Color</div>}
           />
         </div>
         <div className="flex-1">
@@ -65,7 +65,7 @@ const ProductDetailsForm = ({ product, colorOptions, storageOptions }: IProductD
             name="storage"
             control={control}
             options={storageOptions}
-            label="Storage"
+            label={<div className="flex items-center gap-1"><HardDrive className="h4 w-4" />Storage</div>}
           />
         </div>
       </div>

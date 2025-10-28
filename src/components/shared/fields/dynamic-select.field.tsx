@@ -7,7 +7,7 @@ interface SelectFieldProps {
   name: string;
   control: Control<any>;
   options: SelectOption[];
-  label?: string;
+  label?: React.ReactNode;
   placeholder?: string;
   rules?: RegisterOptions;
 }
