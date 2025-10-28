@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useProducts } from "@/hooks/query/use-products";
 import SearchField from "@/components/shared/fields/search.field"
 import ProductContent from "./product-content";
+import { showErrorToast } from "@/lib/toast";
 
 const ProductListWrapper = () => {
   const { data: products, isLoading, isError, error, isSuccess } = useProducts();
@@ -11,6 +12,12 @@ const ProductListWrapper = () => {
   const handleChange = (value: string) => {
     setQuery(value)
   }
+
+  useEffect(() => {
+    if (isError && error) {
+      showErrorToast(error.message);
+    }
+  }, [isError, error]);
 
   return (
     <section className="w-full px-8">
