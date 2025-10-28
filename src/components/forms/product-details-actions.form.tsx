@@ -2,13 +2,15 @@ import type z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";
-import { Loader2, ShoppingCart } from "lucide-react";
+import { HardDrive, Loader2, Palette, ShoppingCart } from "lucide-react";
 
 import { actionFormSchema } from "./product.schema";
 import DynamicSelectField from "../shared/fields/dynamic-select.field";
 import type { SelectOption } from "../shared/select/dynamic-select";
 import { useAddProductToCart } from "@/hooks/mutation/use-add-product-to-cart";
 import { mapFormToAddProductRequest, type ProductResume } from "@/mapper/product.mapper";
+import { useCartStore } from "@/store/cart.store";
+import { showErrorToast, showSuccessToast } from "@/lib/toast";
 
 
 export type IActionFormValues = z.infer<typeof actionFormSchema>;
@@ -31,7 +33,25 @@ const ProductDetailsForm = ({ product, colorOptions, storageOptions }: IProductD
     },
   });
 
-  const { mutate, isPending } = useAddProductToCart();
+  const { addItem } = useCartStore();
+
+  const { mutate, isPending } = useAddProductToCart({
+    onSuccess: (_, { product, formData }) => {
+      addItem({
+        id: product.id,
+        name: product.model,
+        price: product.price,
+        imageURL: product.imageURL,
+        color: formData.color,
+        storage: formData.storage,
+      });
+
+      showSuccessToast(`${product.model} added to cart`);
+    },
+    onError: () => {
+      showErrorToast("Failed to add product to cart");
+    },
+  });
 
   const onSubmit = handleSubmit(async (data) => {
     const payload = mapFormToAddProductRequest(product.id, data);
@@ -57,7 +77,7 @@ const ProductDetailsForm = ({ product, colorOptions, storageOptions }: IProductD
             name="color"
             control={control}
             options={colorOptions}
-            label="Color"
+            label={<div className="flex items-center gap-1"><Palette className="h4 w-4" />Color</div>}
           />
         </div>
         <div className="flex-1">
@@ -65,12 +85,12 @@ const ProductDetailsForm = ({ product, colorOptions, storageOptions }: IProductD
             name="storage"
             control={control}
             options={storageOptions}
-            label="Storage"
+            label={<div className="flex items-center gap-1"><HardDrive className="h4 w-4" />Storage</div>}
           />
         </div>
       </div>
 
-      <Button type="submit" className="w-full max-w-44 mt-2" disabled={isPending}>
+      <Button type="submit" className="w-full max-w-44 mt-2" disabled={isPending || product.price === 0}>
         {isPending ? (
           <>
             <Loader2 className="animate-spin w-4 h-4" />
@@ -86,6 +106,11 @@ const ProductDetailsForm = ({ product, colorOptions, storageOptions }: IProductD
           </>
         )}
       </Button>
+      {product.price === 0 && (
+        <div className="text-xs text-red-500">
+          You can’t add this product to the cart because the price is not available.
+        </div>
+      )}
     </form>
   );
 };

@@ -16,7 +16,7 @@ interface IDynamicSelectProps {
   options: SelectOption[];
   value?: string;
   onChange?: (value: string) => void;
-  label?: string;
+  label?: React.ReactNode;
   placeholder?: string;
 }
 

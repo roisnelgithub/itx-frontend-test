@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import ProductDetailsWrapper from "@/components/products/product-details/product-details.wrapper";
@@ -9,6 +9,7 @@ import ProductDetailsNotFound from "@/components/products/product-details/produc
 import ErrorMessage from "@/components/shared/errors/error-message";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { showErrorToast } from "@/lib/toast";
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
@@ -22,16 +23,24 @@ const ProductDetailsPage = () => {
     setLabel(`/${id}`, product.model);
   }, [id, product, setLabel]);
 
+  useEffect(() => {
+    if (isError && error) {
+      showErrorToast(error.message);
+    }
+  }, [isError, error]);
+
   return (
     <section>
-      <div className="flex w-full gap-8 px-4">
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+      <div className="w-full gap-8 px-4 flex justify-between md:justify-start">
+        <h1 className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-gray-100">
           Product details
         </h1>
         <Link to="/">
-          <Button variant="outline" size="sm" className="pr-4">
-            <ArrowLeft className="w-4 h-4 " />
-            Back
+          <Button variant="outline" size="sm" className="pr-4  justify-center items-center">
+            <ArrowLeft className="w-4 h-4" />
+            <span className="mt-0.5">
+              Back
+            </span>
           </Button>
         </Link>
       </div>
