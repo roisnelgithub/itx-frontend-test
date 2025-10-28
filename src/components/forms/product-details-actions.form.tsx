@@ -8,18 +8,18 @@ import { actionFormSchema } from "./product.schema";
 import DynamicSelectField from "../shared/fields/dynamic-select.field";
 import type { SelectOption } from "../shared/select/dynamic-select";
 import { useAddProductToCart } from "@/hooks/mutation/use-add-product-to-cart";
-import { mapFormToAddProductRequest } from "@/mapper/product.mapper";
+import { mapFormToAddProductRequest, type ProductResume } from "@/mapper/product.mapper";
 
 
 export type IActionFormValues = z.infer<typeof actionFormSchema>;
 
 interface IProductDetailsFormProps {
-  productId: string;
+  product: ProductResume;
   colorOptions: SelectOption[];
   storageOptions: SelectOption[];
 }
 
-const ProductDetailsForm = ({ productId, colorOptions, storageOptions }: IProductDetailsFormProps) => {
+const ProductDetailsForm = ({ product, colorOptions, storageOptions }: IProductDetailsFormProps) => {
   const {
     handleSubmit,
     control,
@@ -34,8 +34,18 @@ const ProductDetailsForm = ({ productId, colorOptions, storageOptions }: IProduc
   const { mutate, isPending } = useAddProductToCart();
 
   const onSubmit = handleSubmit(async (data) => {
-    const payload = mapFormToAddProductRequest(productId, data);
-    mutate(payload);
+    const payload = mapFormToAddProductRequest(product.id, data);
+    const colorLabel = colorOptions.find(c => c.value === data.color)?.label || data.color;
+    const storageLabel = storageOptions.find(s => s.value === data.storage)?.label || data.storage;
+
+    mutate({
+      ...payload,
+      product,
+      formData: {
+        color: colorLabel,
+        storage: storageLabel,
+      },
+    });
   });
 
 

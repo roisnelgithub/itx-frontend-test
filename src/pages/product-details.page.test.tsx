@@ -7,7 +7,6 @@ import ProductDetailsPage from './product-details.page';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { BreadcrumbProvider } from '@/contexts/breadcrumb.context';
 import { useProduct } from '@/hooks/query/use-product';
-import { CartProvider } from '@/contexts/cart.context';
 
 vi.mock('@/hooks/query/use-product');
 
@@ -18,13 +17,11 @@ const renderWithProviders = () =>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <BreadcrumbProvider>
-          <CartProvider>
-            <MemoryRouter initialEntries={['/1']}>
-              <Routes>
-                <Route path="/:id" element={<ProductDetailsPage />} />
-              </Routes>
-            </MemoryRouter>
-          </CartProvider>
+          <MemoryRouter initialEntries={['/1']}>
+            <Routes>
+              <Route path="/:id" element={<ProductDetailsPage />} />
+            </Routes>
+          </MemoryRouter>
         </BreadcrumbProvider>
       </TooltipProvider>
     </QueryClientProvider>
