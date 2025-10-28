@@ -23,7 +23,7 @@ const ProductDetailsWrapper = ({ product }: IProductDetailsWrapperProps) => {
   return (
     <main className="flex justify-center py-12 px-4">
       <div className="flex flex-col md:flex-row w-full max-w-4xl gap-8">
-        <div className="shrink-0 max-w-2xs min-w-2xs justify-center">
+        <div className="max-w-2xs min-w-2xs">
           <ProductDetailsImage alt={product.model} imageURL={product.imageURL} />
         </div>
         <div className="flex-1 flex flex-col gap-4">
