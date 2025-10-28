@@ -1,0 +1,45 @@
+import { Controller, type Control, type RegisterOptions } from "react-hook-form";
+
+import DynamicSelect, { type ISelectOption } from "../select/dynamic-select";
+
+
+interface ISelectFieldProps {
+  name: string;
+  control: Control<any>;
+  options: ISelectOption[];
+  label?: React.ReactNode;
+  placeholder?: string;
+  rules?: RegisterOptions;
+}
+
+export default function DynamicSelectField({
+  name,
+  control,
+  options,
+  label,
+  placeholder = "Select option",
+  rules,
+}: ISelectFieldProps) {
+  return (
+    <Controller
+      name={name}
+      control={control}
+      rules={rules}
+      defaultValue={options.length === 1 ? options[0] : ""}
+      render={({ field, fieldState }) => (
+        <div className="relative">
+          <DynamicSelect
+            options={options}
+            value={field.value ?? ""}
+            onChange={(v) => field.onChange(v)}
+            label={label}
+            placeholder={placeholder}
+          />
+          {fieldState.error && (
+            <p className="lg:absolute lg:-bottom-6 lg:left-0 text-sm text-red-600 mt-1">{fieldState.error.message}</p>
+          )}
+        </div>
+      )}
+    />
+  );
+}

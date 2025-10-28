@@ -1,5 +1,4 @@
 import axios, { AxiosError } from "axios";
-import { showErrorToast } from "./toast";
 
 export const api = axios.create({
   baseURL: 'https://itx-frontend-test.onrender.com',
@@ -8,10 +7,11 @@ export const api = axios.create({
   },
 });
 
-export interface ApiError {
+export interface IApiError {
   message: string;
   status?: number;
 }
+
 
 api.interceptors.response.use(
   response => response,
@@ -20,24 +20,13 @@ api.interceptors.response.use(
     let status: number | undefined;
 
     if (!error.response) {
-      // Network errors
       message = "Network error. Please check your connection.";
     } else {
       const data = error.response.data as { message?: string } | undefined;
-
-      if (data?.message) {
-        // Backend errors
-        message = data.message;
-        status = error.response.status;
-      } else if (error.response.status) {
-        // HTTP errors
-        status = error.response.status;
-        message = `Error ${status}: Something went wrong`;
-      }
+      message = data?.message || `Error ${error.response.status}`;
+      status = error.response.status;
     }
 
-    showErrorToast(message);
-
-    return Promise.reject({ message, status } as ApiError);
+    return Promise.reject({ message, status } as IApiError);
   }
 );
