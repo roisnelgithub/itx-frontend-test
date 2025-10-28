@@ -24,7 +24,7 @@ const ProductDetailsPage = () => {
 
   return (
     <section>
-      <div className="flex w-full gap-8 px-4">
+      <div className="w-full gap-8 px-4 flex justify-between md:justify-start">
         <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
           Product details
         </h1>
