@@ -70,7 +70,7 @@ const ProductDetailsForm = ({ product, colorOptions, storageOptions }: IProductD
         </div>
       </div>
 
-      <Button type="submit" className="w-full max-w-44 mt-2" disabled={isPending}>
+      <Button type="submit" className="w-full max-w-44 mt-2" disabled={isPending || product.price === 0}>
         {isPending ? (
           <>
             <Loader2 className="animate-spin w-4 h-4" />
@@ -86,6 +86,11 @@ const ProductDetailsForm = ({ product, colorOptions, storageOptions }: IProductD
           </>
         )}
       </Button>
+      {product.price === 0 && (
+        <div className="text-xs text-red-500">
+          You can’t add this product to the cart because the price is not available.
+        </div>
+      )}
     </form>
   );
 };
