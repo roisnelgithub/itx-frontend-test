@@ -34,9 +34,10 @@ const ProductDetailsWrapper = ({ product }: IProductDetailsWrapperProps) => {
             <Separator />
             <CardContent>
               <ProductDetailsForm
+                product={product}
                 colorOptions={colorSelectOptions}
                 storageOptions={storageSelectOptions}
-                productId={product.id} />
+              />
             </CardContent>
           </Card>
         </div>
